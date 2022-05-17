@@ -29,7 +29,7 @@ struct LidarEdgeFactor
 		q_last_curr = q_identity.slerp(T(s), q_last_curr);
 		Eigen::Matrix<T, 3, 1> t_last_curr{T(s) * t[0], T(s) * t[1], T(s) * t[2]};
 
-		Eigen::Matrix<T, 3, 1> lp;
+		Eigen::Matrix<T, 3, 1> lp;  //last_point
 		lp = q_last_curr * cp + t_last_curr;
 
 		Eigen::Matrix<T, 3, 1> nu = (lp - lpa).cross(lp - lpb);

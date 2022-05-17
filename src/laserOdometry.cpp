@@ -97,7 +97,7 @@ Eigen::Vector3d t_w_curr(0, 0, 0);
 double para_q[4] = {0, 0, 0, 1};
 double para_t[3] = {0, 0, 0};
 
-Eigen::Map<Eigen::Quaterniond> q_last_curr(para_q);
+Eigen::Map<Eigen::Quaterniond> q_last_curr(para_q);   // p_last = qlast_curr* p_curr + t_last_curr  Map实现 para_q 的引用，两者同时变化
 Eigen::Map<Eigen::Vector3d> t_last_curr(para_t);
 
 std::queue<sensor_msgs::PointCloud2ConstPtr> cornerSharpBuf;
@@ -118,7 +118,7 @@ void TransformToStart(PointType const *const pi, PointType *const po)
         s = 1.0;
     //s = 1;
     Eigen::Quaterniond q_point_last = Eigen::Quaterniond::Identity().slerp(s, q_last_curr);
-    Eigen::Vector3d t_point_last = s * t_last_curr;
+    Eigen::Vector3d t_point_last = s * t_last_curr;  //t_last_curr q_last_curr未更新有问题吧？
     Eigen::Vector3d point(pi->x, pi->y, pi->z);
     Eigen::Vector3d un_point = q_point_last * point + t_point_last;
 

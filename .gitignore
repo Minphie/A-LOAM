@@ -1,1 +1,4 @@
 .vscode/
+build/
+.idea/
+rviz_cfg/aloam_velodyne.rviz
